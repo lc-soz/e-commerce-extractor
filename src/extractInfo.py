@@ -1,7 +1,6 @@
 # coding=utf-8
 from bs4 import BeautifulSoup
 import numpy as np
-import time
 import getText
 
 """
@@ -43,51 +42,10 @@ def extractInfo ( matrix_strings ):
         titles = data_html.findAll( "span", { "class" : "H-titulo" })
         prices = data_html.findAll( "div", { "class" : "listagem-preco" })
         for (i, j) in zip(titles, prices):
-            #print unicode(i.string[0:25].lstrip()).encode('utf-8') + " = ".encode('utf-8') + j.string[3:].encode('utf-8')
-            #time.sleep(0.1)
             matrix_info[row][0] = categorie
             matrix_info[row][1] = i.string.lstrip().rstrip()
             matrix_info[row][2] = j.string[3:]
             row += 1
-        #print categorie + " FINISHED!"
 
     matrix_info.sort(key=lambda x:(x[0] == "", x[0], x[1]))
-
     return matrix_info
-
-    """
-    for k in range(200):
-        #print("%10s|%50s| %s" % (matrix_info[k][0], matrix_info[k][1][0:50], matrix_info[k][2]))
-        f = open('out.txt', 'a')
-        f.write(matrix_info[k][1].encode('utf-8') + '\n')
-        f.close
-    """
-
-
-
-
-    """
-    for i in guide:
-        for j in i:
-            print j
-    print
-    for i in range(10):
-        test = False
-        for j in range(8):
-            if (matrix_strings[i][0] == guide[j][0]):
-                test = True
-        if test:
-            test = "True"
-        else:
-            test = "False"
-        print matrix_strings[i][0] + " " + test
-
-    #gpus = BeautifulSoup(raw_gpu, 'html.parser')
-    #mydivs = soup.findAll("div", { "class" : "stylelistrow" })
-"""
-"""
-    for (i, j) in zip(gpus.findAll("div", { "class" : "listagem-preco"}), gpus.findAll("span", { "class" : "H-titulo"})):
-        if (j.string[0] == 'P'):
-            print j.string.replace('\n', '').encode('utf-8')
-            print i.string
-"""
