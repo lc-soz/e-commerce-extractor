@@ -37,7 +37,7 @@ def extractInfo ( matrix_strings ):
             categorie = matrix_strings[i][0]
         else:
             categorie = guide[test][1]
-
+        print "\t" + categorie
         data_html = BeautifulSoup(matrix_strings[i][1], 'html.parser')
         product = data_html.findAll( "div", { "class" : "listagem-box"})
         for i in product:
@@ -51,5 +51,6 @@ def extractInfo ( matrix_strings ):
             # print matrix_info[row][1][0:100] + "\t" + matrix_info[row][2]
             row += 1
 
+    print "\tSORTING"
     matrix_info.sort(key=lambda x:(x[0] == "", x[0], x[1]))
     return matrix_info
