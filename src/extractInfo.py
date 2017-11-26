@@ -39,12 +39,16 @@ def extractInfo ( matrix_strings ):
             categorie = guide[test][1]
 
         data_html = BeautifulSoup(matrix_strings[i][1], 'html.parser')
-        titles = data_html.findAll( "span", { "class" : "H-titulo" })
-        prices = data_html.findAll( "div", { "class" : "listagem-preco" })
-        for (i, j) in zip(titles, prices):
+        product = data_html.findAll( "div", { "class" : "listagem-box"})
+        for i in product:
+            j = i.find( "span", { "class" : "H-titulo"})
+            k = i.find( "div", { "class" : "listagem-preco"})
+            if (k == None):
+                k = i.find( "div", { "class" : "listagem-precoavista"})
             matrix_info[row][0] = categorie
-            matrix_info[row][1] = i.string.lstrip().rstrip()
-            matrix_info[row][2] = j.string[3:]
+            matrix_info[row][1] = j.string.lstrip().rstrip()
+            matrix_info[row][2] = k.string[3:]
+            # print matrix_info[row][1][0:100] + "\t" + matrix_info[row][2]
             row += 1
 
     matrix_info.sort(key=lambda x:(x[0] == "", x[0], x[1]))
