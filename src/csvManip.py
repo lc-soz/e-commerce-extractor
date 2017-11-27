@@ -119,7 +119,18 @@ def csvManip ( matrix_info, path, header ):
             real_dif = 0
             matrix_csv, matrix_info = match_same_line(matrix_csv, matrix_info, new_col)
             matrix_csv, matrix_info = match_dif_line(matrix_csv, matrix_info, new_col)
-            print matrix_info
+            print "ALL THAT IS LEFT IN INFO:"
+            print "_"*181
+            for row_info in matrix_info:
+                print ("|{:^12s}|{:<150s}|{:^15s}|".format(row_info[0].encode('utf-8'), row_info[1].encode('utf-8'), row_info[2].encode('utf-8')))
+            print "_"*181
+            print "ALL THAT IS LEFT IN CSV:"
+            print "_"*181
+            print ("|{:^12s}|{:<150s}|{:^15s}|".format(matrix_csv[0][0].encode('utf-8'), matrix_csv[0][1].encode('utf-8'), matrix_csv[0][2].encode('utf-8')))
+            for row_csv in matrix_csv:
+                if (row_csv[3] == "" and row_csv[0] != ""):
+                    print ("|{:^12s}|{:<150s}|{:^15s}|".format(row_csv[0].encode('utf-8'), row_csv[1].encode('utf-8'), row_csv[2].encode('utf-8')))
+            print "_"*181
             for (i, j) in zip(matrix_csv, matrix_info):
                 k += 1
                 if (i[1] == "" or j[1] == ""):
